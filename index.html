@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open EduTech Lab</title>
+<meta name="description" content="ICT × 教育の最前線。中学校の教室で生まれた学習ツールを無料公開しています。">
+<meta property="og:title" content="Open EduTech Lab">
+<meta property="og:description" content="ICT × 教育の最前線。中学校の教室で生まれた学習ツールを無料公開しています。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Open EduTech Lab">
+<meta name="twitter:description" content="ICT × 教育の最前線。中学校の教室で生まれた学習ツールを無料公開しています。">
+
+<!-- ▼ ファビコンは元のまま維持 -->
+<link rel="icon" href="favicon.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   KT-Tech-Lab / Light Edition — Design Tokens
+   ============================================================ */
+:root{
+  --paper:#F6F7F4;
+  --paper-2:#FFFFFF;
+  --paper-3:#ECEFE9;
+
+  --ink:#14201B;
+  --ink-2:#4C5A52;
+  --ink-3:#7C887F;
+
+  --edge:rgba(20,32,27,.10);
+  --edge-2:rgba(20,32,27,.20);
+
+  --green:#0E8F63;
+  --green-lit:#10B981;
+  --blue:#1D6FD0;
+  --plum:#7A4FBF;
+  --gold:#B8860B;
+  --gold-lit:#F5C451;
+
+  --r-lg:24px;
+  --r-md:14px;
+  --r-sm:999px;
+
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --shell:min(1280px, 92vw);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Noto Sans JP",system-ui,sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;              /* hidden にすると sticky が壊れるので clip */
+}
+html{overflow-x:clip;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px;}
+
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(880px 620px at 8% -10%, rgba(16,185,129,.16), transparent 60%),
+    radial-gradient(760px 560px at 96% 4%, rgba(29,111,208,.10), transparent 58%),
+    radial-gradient(900px 640px at 50% 106%, rgba(122,79,191,.08), transparent 60%),
+    var(--paper);
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{
+  position:relative;min-height:100svh;
+  display:grid;place-items:center;
+  padding:90px 0 20px;isolation:isolate;
+}
+#particles{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.7;}
+.hero-inner{width:var(--shell);text-align:center;}
+
+.badge{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:7px 17px 7px 13px;
+  border:1px solid var(--edge-2);border-radius:var(--r-sm);
+  background:rgba(255,255,255,.7);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  font-size:.79rem;color:var(--ink-2);
+}
+.badge .dot{
+  width:7px;height:7px;border-radius:50%;background:var(--green-lit);
+  animation:pulse 2.4s var(--ease) infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(16,185,129,.5);}
+  70%{box-shadow:0 0 0 11px rgba(16,185,129,0);}
+  100%{box-shadow:0 0 0 0 rgba(16,185,129,0);}
+}
+
+.hero h1{
+  margin:26px 0 0;
+  font-family:"Space Grotesk","Noto Sans JP",sans-serif;
+  font-weight:700;
+  font-size:clamp(2.5rem,8.2vw,6.2rem);
+  line-height:1.02;letter-spacing:-.038em;
+}
+.hero h1 .jp{
+  display:block;font-family:"Noto Sans JP",sans-serif;font-weight:900;
+  font-size:clamp(1.5rem,4.4vw,3.2rem);letter-spacing:.01em;margin-top:.3em;
+}
+.flow{
+  background:linear-gradient(100deg,var(--ink) 0%,var(--green) 30%,var(--blue) 52%,var(--green) 74%,var(--ink) 100%);
+  background-size:280% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:flow 10s linear infinite;will-change:background-position;
+}
+@keyframes flow{to{background-position:280% 0;}}
+
+.type-line{
+  margin:28px auto 0;min-height:1.9em;
+  font-size:clamp(.98rem,2.1vw,1.26rem);color:var(--ink-2);
+}
+.caret{
+  display:inline-block;width:2px;height:1.05em;vertical-align:-.16em;margin-left:3px;
+  background:var(--green);animation:blink 1.05s steps(1) infinite;
+}
+@keyframes blink{50%{opacity:0;}}
+.who{margin:14px 0 0;color:var(--ink-3);font-size:.92rem;letter-spacing:.06em;}
+
+.hero-cta{margin-top:38px;display:flex;gap:13px;justify-content:center;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:13px 27px;border-radius:var(--r-sm);
+  font-weight:700;font-size:.94rem;
+  border:1px solid var(--edge-2);background:rgba(255,255,255,.75);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);
+}
+.btn:hover{transform:translateY(-2px);background:#fff;}
+.btn-primary{
+  border-color:transparent;color:#fff;
+  background:linear-gradient(120deg,var(--green),#0d7f74);
+  box-shadow:0 12px 30px -12px rgba(14,143,99,.8);
+}
+.btn-primary:hover{box-shadow:0 18px 40px -12px rgba(14,143,99,.95);}
+
+/* ============================================================
+   受賞マーキー（唯一の暗色帯）
+   ============================================================ */
+.marquee{
+  position:relative;padding:18px 0;overflow:hidden;
+  background:linear-gradient(100deg,#14201B,#1C2E26 50%,#14201B);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+}
+.marquee-track{display:flex;width:max-content;animation:slide 44s linear infinite;will-change:transform;}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+@keyframes slide{to{transform:translate3d(-50%,0,0);}}
+.marquee-item{
+  display:inline-flex;align-items:center;gap:11px;padding:0 34px;white-space:nowrap;
+  font-size:clamp(.85rem,1.7vw,1rem);font-weight:600;color:#F3E3B8;
+}
+.marquee-item .star{
+  color:var(--gold-lit);filter:drop-shadow(0 0 8px rgba(245,196,81,.9));
+  animation:twinkle 3.4s ease-in-out infinite;
+}
+.marquee-item:nth-child(2n) .star{animation-delay:.7s;}
+.marquee-item:nth-child(3n) .star{animation-delay:1.5s;}
+@keyframes twinkle{0%,100%{opacity:.55;transform:scale(.9);}50%{opacity:1;transform:scale(1.15);}}
+.marquee-item .sep{color:rgba(245,196,81,.3);}
+
+/* ============================================================
+   セクション
+   ============================================================ */
+.section{width:var(--shell);margin:0 auto;padding:92px 0 0;}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px;}
+.section-head h2{
+  margin:0;font-family:"Space Grotesk","Noto Sans JP",sans-serif;
+  font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:700;letter-spacing:-.02em;
+}
+.section-head p{margin:8px 0 0;color:var(--ink-3);font-size:.93rem;}
+#count{
+  font-family:"Space Grotesk",sans-serif;color:var(--ink-2);font-size:.88rem;
+  padding:7px 15px;border:1px solid var(--edge);border-radius:var(--r-sm);background:rgba(255,255,255,.7);
+}
+
+/* ---------- 検索 + フィルタ ---------- */
+.controls{
+  position:sticky;top:12px;z-index:40;
+  display:flex;gap:13px;align-items:center;flex-wrap:wrap;padding:13px;
+  border:1px solid var(--edge);border-radius:var(--r-lg);
+  background:rgba(255,255,255,.78);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
+  box-shadow:0 18px 40px -32px rgba(20,32,27,.7);
+}
+.search-wrap{position:relative;flex:1 1 250px;min-width:210px;}
+.search-wrap svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--ink-3);pointer-events:none;}
+#search{
+  width:100%;padding:12px 16px 12px 44px;
+  border:1px solid var(--edge);border-radius:var(--r-sm);
+  background:#fff;color:var(--ink);font-size:.95rem;
+  transition:border-color .2s var(--ease),box-shadow .2s var(--ease);
+}
+#search::placeholder{color:var(--ink-3);}
+#search:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 4px rgba(14,143,99,.13);}
+
+#filters{display:flex;gap:8px;flex-wrap:wrap;}
+.filter-btn{
+  padding:8px 16px;border-radius:var(--r-sm);
+  border:1px solid var(--edge);background:rgba(255,255,255,.6);
+  color:var(--ink-2);font-size:.8rem;font-weight:500;
+  transition:all .24s var(--ease);
+}
+.filter-btn:hover{color:var(--ink);border-color:var(--edge-2);background:#fff;}
+.filter-btn.active{
+  color:#fff;font-weight:700;border-color:transparent;
+  background:linear-gradient(120deg,var(--green),#12a377);
+  box-shadow:0 10px 26px -10px rgba(14,143,99,.85);
+}
+.filter-btn.active[data-subj="情報"]{background:linear-gradient(120deg,var(--blue),#3b8ae8);box-shadow:0 10px 26px -10px rgba(29,111,208,.85);}
+.filter-btn.active[data-subj="探究"]{background:linear-gradient(120deg,var(--plum),#9a6fd8);box-shadow:0 10px 26px -10px rgba(122,79,191,.85);}
+.filter-btn.active[data-subj="受賞"]{background:linear-gradient(120deg,#A9760A,var(--gold-lit));color:#241A03;box-shadow:0 10px 26px -10px rgba(184,134,11,.85);}
+
+/* ============================================================
+   Index（左）＋ Stage（右）
+   ============================================================ */
+.showcase{
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:46px;margin-top:60px;align-items:start;
+}
+
+/* ---- 左：ツール名のインデックス ---- */
+#grid{border-top:1px solid var(--edge);}
+.row{
+  --accent:var(--green);
+  position:relative;display:block;
+  padding:22px 58px 22px 20px;
+  border-bottom:1px solid var(--edge);
+  overflow:hidden;
+  transition:padding-left .38s var(--ease);
+}
+.row::before{           /* 左から差し込む色帯 */
+  content:"";position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg, color-mix(in srgb, var(--accent) 13%, transparent), transparent 78%);
+  transition:width .45s var(--ease);
+}
+.row::after{            /* 左端のバー */
+  content:"";position:absolute;left:0;top:14%;bottom:14%;width:3px;border-radius:3px;
+  background:var(--accent);transform:scaleY(0);transform-origin:center;
+  transition:transform .38s var(--ease);
+}
+.row:hover,.row:focus-visible,.row.is-active{padding-left:32px;}
+.row:hover::before,.row:focus-visible::before,.row.is-active::before{width:100%;}
+.row:hover::after,.row:focus-visible::after,.row.is-active::after{transform:scaleY(1);}
+
+.row-title{
+  position:relative;z-index:1;margin:0;
+  font-family:"Space Grotesk","Noto Sans JP",sans-serif;
+  font-size:clamp(1.32rem,2.7vw,2rem);
+  font-weight:700;letter-spacing:-.02em;line-height:1.3;
+  color:var(--ink);
+  transition:color .3s var(--ease);
+}
+.row:hover .row-title,.row.is-active .row-title{color:var(--accent);}
+.row-meta{
+  position:relative;z-index:1;
+  display:flex;align-items:center;gap:10px;margin-top:7px;
+  font-size:.82rem;color:var(--ink-3);
+}
+.row-meta .subj{
+  display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--accent);
+}
+.row-meta .subj::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);}
+.row-meta .star{color:var(--gold);font-size:.9rem;}
+.row-arrow{
+  position:absolute;right:20px;top:50%;z-index:1;
+  width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid var(--edge-2);color:var(--accent);
+  transform:translate(8px,-50%);opacity:0;
+  transition:opacity .32s var(--ease),transform .32s var(--ease),background .32s var(--ease);
+}
+.row:hover .row-arrow,.row:focus-visible .row-arrow,.row.is-active .row-arrow{
+  opacity:1;transform:translate(0,-50%);background:#fff;
+}
+
+/* 受賞行はうっすら金の地色 */
+.row.awarded{--accent:var(--gold);}
+
+/* ---- 右：ステージ ---- */
+.stage{
+  position:sticky;top:140px;
+  display:flex;flex-direction:column;
+  max-height:calc(100svh - 112px);
+  border:1px solid var(--edge);border-radius:var(--r-lg);
+  background:rgba(255,255,255,.82);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  box-shadow:0 30px 60px -40px rgba(20,32,27,.65);
+  overflow:hidden;               /* 角丸のためのクリップ。スクロールは .stage-body が担当 */
+}
+.stage-media{
+  position:relative;flex:0 0 auto;
+  aspect-ratio:16/9;max-height:min(34svh,320px);
+  overflow:hidden;background:var(--paper-3);
+}
+.stage-body{
+  flex:1 1 auto;min-height:0;
+  overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
+  padding:26px 28px 30px;
+}
+.stage-media video{width:100%;height:100%;object-fit:cover;display:block;}
+.stage-motif{position:absolute;inset:0;width:100%;height:100%;}
+.stage-subj{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:5px 14px;border-radius:var(--r-sm);
+  font-size:.76rem;font-weight:700;letter-spacing:.04em;
+  color:var(--stage-accent,var(--green));
+  background:color-mix(in srgb, var(--stage-accent,var(--green)) 11%, transparent);
+  border:1px solid color-mix(in srgb, var(--stage-accent,var(--green)) 28%, transparent);
+}
+.stage-body h3{
+  margin:14px 0 0;font-size:clamp(1.4rem,2.6vw,1.9rem);
+  font-weight:700;line-height:1.4;letter-spacing:-.01em;
+}
+.stage-body .desc{margin:12px 0 0;color:var(--ink-2);font-size:.93rem;line-height:1.85;}
+.stage-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px;}
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 12px;border-radius:var(--r-sm);
+  font-size:.74rem;font-weight:500;border:1px solid;
+}
+.tag.award{
+  color:#241A03;font-weight:700;border-color:transparent;
+  background:linear-gradient(120deg,var(--gold-lit),#FFE9A8);
+  box-shadow:0 0 16px -5px rgba(245,196,81,.9);
+}
+.stage-cta{
+  display:inline-flex;align-items:center;gap:10px;margin-top:24px;
+  padding:13px 26px;border-radius:var(--r-sm);
+  font-weight:700;font-size:.94rem;color:#fff;border:1px solid transparent;
+  background:var(--stage-accent,var(--green));
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),filter .25s var(--ease);
+  box-shadow:0 14px 30px -14px color-mix(in srgb, var(--stage-accent,var(--green)) 90%, transparent);
+}
+.stage-cta:hover{transform:translateY(-2px);filter:brightness(1.06);}
+.stage.swap .stage-body,.stage.swap .stage-media{animation:swapin .5s var(--ease);}
+@keyframes swapin{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+
+.empty{padding:64px 20px;text-align:center;color:var(--ink-3);}
+.empty strong{display:block;color:var(--ink-2);font-size:1.05rem;margin-bottom:8px;font-weight:500;}
+
+/* ---------- スクロール連動 ---------- */
+.reveal{opacity:0;transform:translate3d(0,20px,0);}
+.reveal.in{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease);}
+
+/* ---------- Footer ---------- */
+footer{margin-top:110px;padding:38px 0;border-top:1px solid var(--edge);}
+.foot-inner{width:var(--shell);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.foot-logo{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.02em;font-size:1.02rem;}
+.foot-inner p{margin:0;color:var(--ink-3);font-size:.85rem;}
+
+/* ============================================================
+   モバイル：ステージは隠し、行をタップで直接開く
+   ============================================================ */
+@media (max-width:900px){
+  .showcase{grid-template-columns:1fr;gap:0;}
+  .stage{display:none;}
+  .row{padding:20px 52px 20px 16px;}
+  .row-desc{
+    position:relative;z-index:1;margin:8px 0 0;
+    color:var(--ink-2);font-size:.87rem;line-height:1.7;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .controls{position:static;}
+  .filter-btn{flex:1 1 auto;text-align:center;padding:10px 14px;}
+}
+@media (min-width:901px){
+  .row-desc{display:none;}
+  /* 左カラムを下に伸ばし、最後の行までステージを固定したままにする */
+  #grid{padding-bottom:clamp(160px, 38svh, 460px);}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;scroll-behavior:auto !important;}
+  .reveal{opacity:1;transform:none;}
+  #particles{display:none;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========================== HERO ========================== -->
+<header class="hero">
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <span class="badge"><span class="dot"></span>Open EduTech Lab</span>
+    <h1>
+      <span class="flow">ICT &times; EDUCATION</span>
+      <span class="jp">教育の最前線を、教室から。</span>
+    </h1>
+    <p class="type-line"><span id="typed"></span><span class="caret"></span></p>
+  </div>
+</header>
+
+<!-- ========================== 受賞マーキー ========================== -->
+<section class="marquee" id="awards" aria-label="受賞実績">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</section>
+
+<!-- ========================== ツール ========================== -->
+<main class="section" id="tools">
+  <div class="section-head reveal">
+    <div>
+      <h2>Tools</h2>
+      <p>名前にふれると中身が切り替わります。気になったものをそのまま開いてください。</p>
+    </div>
+    <span id="count"></span>
+  </div>
+
+  <div class="controls reveal">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path>
+      </svg>
+      <input id="search" type="search" placeholder="ツール名・タグ・キーワードで検索" autocomplete="off">
+    </div>
+    <div id="filters"></div>
+  </div>
+
+  <div class="showcase reveal">
+    <div id="grid"></div>
+    <aside class="stage" id="stage" aria-live="polite"></aside>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <span class="foot-logo">Open EduTech Lab</span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   ▼▼▼ ここから既存の TOOLS 配列に丸ごと差し替えてください ▼▼▼
+   構造は id / t / subj / tags / d / url / external / previews のまま
+   ============================================================ */
+const TOOLS = [
+  { id:"chappy", t:"チャッピー探し", subj:"探究",
+    tags:["WebXR","AR","ゲーム"],
+    d:"スマートフォンをかざして AR でチャッピーを探す WebXR アプリ。教室にいながら自然観察の入口をつくります。",
+    url:"https://kt-1127.github.io/AR/", external:true, previews:["AR/top2.png"] },
+
+  { id:"chappy-lab", t:"チャッピーラボ", subj:"計測・制御",
+    tags:["ｽﾀｯｸちゃん（M5Stack_CoreS3）","生成AI","プログラミング"],
+    d:"チャッピーを使ってプログラミングを学べる教育ツール。エディタ・ダッシュボード・29問の学習ページを搭載。",
+    url:"https://kt-1127.github.io/chappy-lab/", external:true, previews:["チャッピーラボ/top2.png"] },
+  
+      { id:"joho-literacy", t:"情報リテラシー", subj:"情報",
+    tags:["情報モラル","フィルターバブル","エコーチェンバー"],
+    d:"厳選した16項目の情報基礎！個人でもクラスでも学習が可能。",
+    url:"https://information-literacy-edu.web.app/index.html", external:true,
+    previews:["情報リテラシー/katayotta-/top2.png"] },
+  
+    { id:"learning-step", t:"Learning Step", subj:"技術",
+    tags:["自由進度学習","授業支援","1EdTech-Japan-賞"],
+    d:"生徒が自分のペースで学習計画を立て、進度を可視化しながら進める自由進度学習システム。教師は全員の進捗を一覧で把握できます。",
+    url:"https://kt-1127.github.io/LearningStep/", external:true,
+    previews:["自由進度学習システム/jiyushindo-images/top2.png"] },
+
+  { id:"growlog", t:"Growlog", subj:"生物育成",
+    tags:["観察記録","学習デジタル教材コンクール（日本児童教育振興財団賞）"],
+    d:"生物育成の観察記録を写真とテキストで蓄積し、成長の変化を時系列で振り返れる学習ログツール。",
+    url:"https://kt-1127.github.io/Growlog/", external:true,
+    previews:["Growlog/growlog-images/top2.png"] },
+
+  { id:"assistant-chatbot", t:"アシスタントAIチャットボット", subj:"探究",
+    tags:["生成AI","授業支援","東書教育賞_優秀賞"],
+    d:"何でも回答してくれるチャットボット。教師は生徒の全ログを管理！県内の学校で活用されています。",
+    url:"https://kt-1127.github.io/Assistant_AI_chatbot/", external:true,
+    previews:["アシスタントAIチャットボット/chatbot-images/top2.png"] },
+
+  { id:"chatbot-edu", t:"ChatBot-edu", subj:"情報",
+    tags:["プログラミング","データ活用","生成AI"],
+    d:"ブロックをつなぐ感覚でチャットボットを設計・制作できる教育向けチャットボット制作ツール。",
+    url:"https://kt-1127.github.io/ChatBot-edu_easy/", external:true,
+    previews:["chatbot-edu/img/top2.png"] },
+
+  { id:"laser-cad", t:"LaserCutterCAD", subj:"技術",
+    tags:["木工作品","レーザー加工","CAD"],
+    d:"材料のサイズを入力するだけで木取り図を自動生成し、レーザー加工機用のデータまで書き出せるCADツール。",
+    url:"https://kt-1127.github.io/LasercutterCAD_web/", external:true,
+    previews:["LaserCutterCAD/img/top2.png"] },
+
+  { id:"energy-mix", t:"日本エネルギーミックス大作戦", subj:"エネルギー変換",
+    tags:["発電","トレードオフ","学習デジタル教材コンクール（文部科学大臣賞）"],
+    d:"発電方法の組み合わせを選び、コスト・CO2・安定供給のバランスを試行錯誤するシミュレーションゲーム。",
+    url:"https://kt-1127.github.io/energy-simulator-2025-2050/", external:true,
+    previews:["エネルギーミックス大作戦/energy-images/top2.png"] },
+
+
+  { id:"manabi-compass", t:"まなびコンパス", subj:"探究",
+    tags:["振り返り","ミニゲーム","学習支援"],
+    d:"学習の振り返りを習慣化するための学習支援ツール。ミニゲームで楽しく取り組めます。",
+    url:"https://kt-1127.github.io/Learn-compass/", external:true,
+    previews:["まなびコンパス/manabi-compass-images/top2.png"] },
+
+  { id:"data-lab", t:"みんなのデータラボ", subj:"情報",
+    tags:["データ活用","探究","AI分析"],
+    d:"クラス全員のデータを収集・可視化・AI分析できる探究支援ツール。付箋ボードで考えを共有しながら深める。",
+    url:"https://kt-1127.github.io/Minalab/", external:true,
+    previews:["みんなのデータラボ/img/top2.png"] },
+
+  { id:"app-lab", t:"みんなのアプリラボ", subj:"情報",
+    tags:["アプリ制作","プログラミング","AI活用"],
+    d:"生徒が自分でアプリを設計・制作できるノーコード×AIのアプリ制作支援ツール。",
+    url:"https://kt-1127.github.io/Minalab-app/", external:true,
+    previews:["みんなのアプリラボ/img/top2.png"] }
+];
+/* ============================================================
+   ▲▲▲ 差し替えここまで ▲▲▲
+   ============================================================ */
+
+const AWARDS = [
+  "すべてのツールを無料公開",
+  "セットアップマニュアル配布中",
+  "指導案・授業計画を添付",
+  "Google スプレッドシート連携対応",
+  "中学校の技術・情報の授業でそのまま使える",
+  "生徒のタブレット・スマホで動作確認済み",
+  "長野県内の複数校で実践導入中"
+];
+
+const AWARD_TAGS = ["文科大臣賞","ICT夢コンテスト","受賞","大臣賞","入賞","奨励賞","財団賞","賞"];
+const isAwardTag = tag => AWARD_TAGS.some(a => tag.includes(a));
+
+const SUBJ_COLOR = { "技術":"var(--green)", "情報":"var(--blue)", "探究":"var(--plum)" };
+const SUBJ_HEX   = { "技術":"#0E8F63", "情報":"#1D6FD0", "探究":"#7A4FBF" };
+const subjColor = s => SUBJ_COLOR[s] || "var(--ink-2)";
+const subjHex   = s => SUBJ_HEX[s]   || "#4C5A52";
+
+const $ = s => document.querySelector(s);
+const grid = $("#grid"), filters = $("#filters"), search = $("#search"),
+      countEl = $("#count"), stage = $("#stage");
+
+/* ---------- 受賞マーキー ---------- */
+$("#marqueeTrack").innerHTML = (() => {
+  const html = AWARDS.map(a =>
+    `<span class="marquee-item"><span class="star">★</span>${a}<span class="sep">／</span></span>`).join("");
+  return html + html;
+})();
+
+/* ---------- フィルタ ---------- */
+const FIXED_SUBJECTS = ["技術","情報","探究"];
+let activeFilter = "all";
+
+function buildFilters(){
+  const items = [{key:"all", label:"すべて"}]
+    .concat(FIXED_SUBJECTS.map(s => ({key:s, label:s})))
+    .concat([{key:"award", label:"受賞", subj:"受賞"}]);
+
+  filters.innerHTML = items.map(i =>
+    `<button class="filter-btn${i.key==="all"?" active":""}" data-filter="${i.key}" data-subj="${i.subj||i.key}">${i.label}</button>`).join("");
+
+  filters.addEventListener("click", e => {
+    const btn = e.target.closest(".filter-btn");
+    if(!btn) return;
+    filters.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeFilter = btn.dataset.filter;
+    render();
+  });
+}
+
+/* ---------- 行（インデックス） ---------- */
+function rowHTML(tool){
+  const hasAward = (tool.tags||[]).some(isAwardTag);
+  const subj = tool.subj || "その他";
+  const target = tool.external ? "_blank" : "_self";
+  const rel = tool.external ? ' rel="noopener noreferrer"' : "";
+
+  return `<a class="row${hasAward?" awarded":""}" href="${tool.url}" target="${target}"${rel}
+             data-id="${tool.id}" style="--accent:${hasAward?"var(--gold)":subjColor(subj)}">
+    <h3 class="row-title">${tool.t}</h3>
+    <div class="row-meta">
+      <span class="subj">${subj}</span>
+      ${hasAward?'<span class="star">★</span>':""}
+      <span>${(tool.tags||[]).slice(0,3).join("・")}</span>
+    </div>
+    <p class="row-desc">${tool.d||""}</p>
+    <span class="row-arrow" aria-hidden="true">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        ${tool.external?'<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>':'<path d="M5 12h13M13 6l6 6-6 6"/>'}
+      </svg>
+    </span>
+  </a>`;
+}
+
+/* ---------- ステージ ---------- */
+function motifSVG(color, seed){
+  const rings = [...Array(7)].map((_,i) =>
+    `<circle cx="${34+((seed*13)%22)}%" cy="${58-((seed*7)%16)}%" r="${9+i*8}%"
+             fill="none" stroke="${color}" stroke-opacity="${(0.30-i*0.035).toFixed(2)}" stroke-width="1.4"/>`).join("");
+  return `<svg class="stage-motif" viewBox="0 0 100 62" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect width="100" height="62" fill="${color}" opacity=".05"/>${rings}</svg>`;
+}
+
+function setStage(tool){
+  const hasAward = (tool.tags||[]).some(isAwardTag);
+  const subj = tool.subj || "その他";
+  const accent = hasAward ? "var(--gold)" : subjColor(subj);
+  const seed = [...tool.id].reduce((a,c)=>a+c.charCodeAt(0),0);
+  const target = tool.external ? "_blank" : "_self";
+  const rel = tool.external ? ' rel="noopener noreferrer"' : "";
+
+  const media = (tool.previews && tool.previews.length)
+    ? (tool.previews[0].match(/\.(mp4|webm|ogg)$/i)
+        ? `<video src="${tool.previews[0]}" muted loop autoplay playsinline preload="metadata"></video>`
+        : `<img src="${tool.previews[0]}" alt="${tool.t} プレビュー" style="width:100%;height:100%;object-fit:contain;display:block;background:var(--paper-3);">`)
+    : motifSVG(hasAward ? "#B8860B" : subjHex(subj), seed);
+
+  const tags = (tool.tags||[]).map(tag => {
+    if(isAwardTag(tag)) return `<span class="tag award">★ ${tag}</span>`;
+    const h = [...tag].reduce((a,c)=>a+c.charCodeAt(0),0) % 360;
+    return `<span class="tag" style="color:hsl(${h} 52% 34%);background:hsl(${h} 60% 55% / .11);border-color:hsl(${h} 45% 45% / .28)">${tag}</span>`;
+  }).join("");
+
+  stage.style.setProperty("--stage-accent", accent);
+  stage.innerHTML = `
+    <div class="stage-media">${media}</div>
+    <div class="stage-body">
+      <span class="stage-subj">${subj}</span>
+      <h3>${tool.t}</h3>
+      <p class="desc">${tool.d||""}</p>
+      <div class="stage-tags">${tags}</div>
+      <a class="stage-cta" href="${tool.url}" target="${target}"${rel}>
+        開く
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>`;
+
+  stage.classList.remove("swap");
+  void stage.offsetWidth;
+  stage.classList.add("swap");
+}
+
+/* ---------- 描画 ---------- */
+let current = [];
+function render(){
+  const q = search.value.trim().toLowerCase();
+
+  current = TOOLS.filter(tool => {
+    const hasAward = (tool.tags||[]).some(isAwardTag);
+    const passFilter =
+      activeFilter === "all"   ? true :
+      activeFilter === "award" ? hasAward :
+      tool.subj === activeFilter;
+    if(!passFilter) return false;
+    if(!q) return true;
+    return [tool.t, tool.d, tool.subj, ...(tool.tags||[])].join(" ").toLowerCase().includes(q);
+  });
+
+  countEl.textContent = `${current.length} / ${TOOLS.length} tools`;
+
+  if(!current.length){
+    grid.innerHTML = `<div class="empty"><strong>該当するツールが見つかりません</strong>キーワードを短くするか、フィルタを「すべて」に戻してみてください。</div>`;
+    stage.innerHTML = "";
+    return;
+  }
+
+  grid.innerHTML = current.map(rowHTML).join("");
+  setStage(current[0]);
+  grid.querySelector(".row")?.classList.add("is-active");
+  bindRows();
+}
+
+function bindRows(){
+  grid.querySelectorAll(".row").forEach(row => {
+    const activate = () => {
+      const tool = current.find(t => t.id === row.dataset.id);
+      if(!tool) return;
+      grid.querySelectorAll(".row").forEach(r => r.classList.remove("is-active"));
+      row.classList.add("is-active");
+      setStage(tool);
+    };
+    row.addEventListener("pointerenter", activate);
+    row.addEventListener("focus", activate);
+  });
+}
+
+/* ---------- フェードイン ---------- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+  });
+}, { threshold:.1, rootMargin:"0px 0px -40px 0px" });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+/* ---------- タイプライター ---------- */
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const PHRASES = [
+  "生徒が自分で決める、を支える道具をつくる。",
+  "引き算の授業デザイン。",
+  "生成AI × データ活用 × プログラミング。",
+  "教室で生まれ、教室で磨かれたツール。"
+];
+(function typewriter(){
+  const el = $("#typed");
+  if(reduceMotion){ el.textContent = PHRASES[0]; return; }
+  let p = 0, i = 0, deleting = false;
+  (function tick(){
+    const text = PHRASES[p];
+    el.textContent = deleting ? text.slice(0, --i) : text.slice(0, ++i);
+    let wait = deleting ? 34 : 74;
+    if(!deleting && i === text.length){ deleting = true; wait = 2100; }
+    else if(deleting && i === 0){ deleting = false; p = (p+1) % PHRASES.length; wait = 420; }
+    setTimeout(tick, wait);
+  })();
+})();
+
+/* ---------- ヒーロー背景 ---------- */
+(function particles(){
+  const cv = $("#particles");
+  if(reduceMotion || !cv) return;
+  const ctx = cv.getContext("2d", { alpha:true });
+  let w,h,dpr,dots=[],running=true,raf;
+
+  function resize(){
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    w = cv.clientWidth; h = cv.clientHeight;
+    cv.width = w*dpr; cv.height = h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const n = Math.round(Math.min(64, (w*h)/19000));
+    dots = Array.from({length:n}, () => ({
+      x:Math.random()*w, y:Math.random()*h,
+      vx:(Math.random()-.5)*.26, vy:(Math.random()-.5)*.26,
+      r:Math.random()*1.5+.6
+    }));
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(const d of dots){
+      d.x+=d.vx; d.y+=d.vy;
+      if(d.x<0||d.x>w) d.vx*=-1;
+      if(d.y<0||d.y>h) d.vy*=-1;
+      ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+      ctx.fillStyle="rgba(14,143,99,.42)"; ctx.fill();
+    }
+    for(let a=0;a<dots.length;a++) for(let b=a+1;b<dots.length;b++){
+      const dx=dots[a].x-dots[b].x, dy=dots[a].y-dots[b].y, d2=dx*dx+dy*dy;
+      if(d2<16000){
+        ctx.beginPath(); ctx.moveTo(dots[a].x,dots[a].y); ctx.lineTo(dots[b].x,dots[b].y);
+        ctx.strokeStyle=`rgba(29,111,208,${(1-d2/16000)*.13})`; ctx.lineWidth=1; ctx.stroke();
+      }
+    }
+    if(running) raf = requestAnimationFrame(draw);
+  }
+  resize(); draw();
+  addEventListener("resize", resize, { passive:true });
+  new IntersectionObserver(([en])=>{
+    running = en.isIntersecting;
+    if(running) raf = requestAnimationFrame(draw); else cancelAnimationFrame(raf);
+  },{threshold:0}).observe(cv);
+})();
+
+/* ---------- 起動 ---------- */
+buildFilters();
+render();
+search.addEventListener("input", render);
+</script>
+</body>
+</html>
