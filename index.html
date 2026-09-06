@@ -13,6 +13,15 @@
 <meta name="twitter:title" content="Open EduTech Lab">
 <meta name="twitter:description" content="ICT × 教育の最前線。中学校の教室で生まれた学習ツールを無料公開しています。">
 
+<!-- ▼ Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGT2Y7KLF3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGT2Y7KLF3');
+</script>
+
 <!-- ▼ ファビコンは元のまま維持 -->
 <link rel="icon" href="favicon.png" type="image/png">
 
@@ -182,7 +191,7 @@ body::before{
 /* ============================================================
    セクション
    ============================================================ */
-.section{width:var(--shell);margin:0 auto;padding:92px 0 0;}
+.section{width:var(--shell);margin:0 auto;padding:40px 0 0;}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px;}
 .section-head h2{
   margin:0;font-family:"Space Grotesk","Noto Sans JP",sans-serif;
@@ -232,129 +241,91 @@ body::before{
 .filter-btn.active[data-subj="受賞"]{background:linear-gradient(120deg,#A9760A,var(--gold-lit));color:#241A03;box-shadow:0 10px 26px -10px rgba(184,134,11,.85);}
 
 /* ============================================================
-   Index（左）＋ Stage（右）
+   グリッドカード（PC・スマホ共通）
    ============================================================ */
-.showcase{
-  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
-  gap:46px;margin-top:60px;align-items:start;
+.showcase{margin-top:32px;}
+
+#grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+@media (max-width:700px){
+  #grid{grid-template-columns:repeat(2,1fr);gap:12px;}
 }
 
-/* ---- 左：ツール名のインデックス ---- */
-#grid{border-top:1px solid var(--edge);}
-.row{
+/* カード */
+.card{
   --accent:var(--green);
-  position:relative;display:block;
-  padding:22px 58px 22px 20px;
-  border-bottom:1px solid var(--edge);
-  overflow:hidden;
-  transition:padding-left .38s var(--ease);
-}
-.row::before{           /* 左から差し込む色帯 */
-  content:"";position:absolute;left:0;top:0;bottom:0;width:0;
-  background:linear-gradient(90deg, color-mix(in srgb, var(--accent) 13%, transparent), transparent 78%);
-  transition:width .45s var(--ease);
-}
-.row::after{            /* 左端のバー */
-  content:"";position:absolute;left:0;top:14%;bottom:14%;width:3px;border-radius:3px;
-  background:var(--accent);transform:scaleY(0);transform-origin:center;
-  transition:transform .38s var(--ease);
-}
-.row:hover,.row:focus-visible,.row.is-active{padding-left:32px;}
-.row:hover::before,.row:focus-visible::before,.row.is-active::before{width:100%;}
-.row:hover::after,.row:focus-visible::after,.row.is-active::after{transform:scaleY(1);}
-
-.row-title{
-  position:relative;z-index:1;margin:0;
-  font-family:"Space Grotesk","Noto Sans JP",sans-serif;
-  font-size:clamp(1.32rem,2.7vw,2rem);
-  font-weight:700;letter-spacing:-.02em;line-height:1.3;
-  color:var(--ink);
-  transition:color .3s var(--ease);
-}
-.row:hover .row-title,.row.is-active .row-title{color:var(--accent);}
-.row-meta{
-  position:relative;z-index:1;
-  display:flex;align-items:center;gap:10px;margin-top:7px;
-  font-size:.82rem;color:var(--ink-3);
-}
-.row-meta .subj{
-  display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--accent);
-}
-.row-meta .subj::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);}
-.row-meta .star{color:var(--gold);font-size:.9rem;}
-.row-arrow{
-  position:absolute;right:20px;top:50%;z-index:1;
-  width:34px;height:34px;border-radius:50%;
-  display:grid;place-items:center;
-  border:1px solid var(--edge-2);color:var(--accent);
-  transform:translate(8px,-50%);opacity:0;
-  transition:opacity .32s var(--ease),transform .32s var(--ease),background .32s var(--ease);
-}
-.row:hover .row-arrow,.row:focus-visible .row-arrow,.row.is-active .row-arrow{
-  opacity:1;transform:translate(0,-50%);background:#fff;
-}
-
-/* 受賞行はうっすら金の地色 */
-.row.awarded{--accent:var(--gold);}
-
-/* ---- 右：ステージ ---- */
-.stage{
-  position:sticky;top:140px;
   display:flex;flex-direction:column;
-  max-height:calc(100svh - 112px);
-  border:1px solid var(--edge);border-radius:var(--r-lg);
-  background:rgba(255,255,255,.82);
-  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
-  box-shadow:0 30px 60px -40px rgba(20,32,27,.65);
-  overflow:hidden;               /* 角丸のためのクリップ。スクロールは .stage-body が担当 */
+  border-radius:var(--r-md);
+  overflow:hidden;
+  background:var(--paper-2);
+  border:1px solid var(--edge);
+  text-decoration:none;color:inherit;
+  transition:transform .22s var(--ease),box-shadow .22s var(--ease);
 }
-.stage-media{
-  position:relative;flex:0 0 auto;
-  aspect-ratio:16/9;max-height:min(34svh,320px);
-  overflow:hidden;background:var(--paper-3);
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px -16px rgba(20,32,27,.22);
 }
-.stage-body{
-  flex:1 1 auto;min-height:0;
-  overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
-  padding:26px 28px 30px;
+.card.awarded{--accent:var(--gold);}
+
+/* 画像エリア　top2.png は 1504×667 ≒ 2.25:1 */
+.card-img{
+  aspect-ratio:1504/667;
+  background:var(--paper-3);
+  overflow:hidden;flex-shrink:0;
 }
-.stage-media video{width:100%;height:100%;object-fit:cover;display:block;}
-.stage-motif{position:absolute;inset:0;width:100%;height:100%;}
-.stage-subj{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:5px 14px;border-radius:var(--r-sm);
-  font-size:.76rem;font-weight:700;letter-spacing:.04em;
-  color:var(--stage-accent,var(--green));
-  background:color-mix(in srgb, var(--stage-accent,var(--green)) 11%, transparent);
-  border:1px solid color-mix(in srgb, var(--stage-accent,var(--green)) 28%, transparent);
+.card-img img{
+  width:100%;height:100%;
+  object-fit:contain;display:block;
 }
-.stage-body h3{
-  margin:14px 0 0;font-size:clamp(1.4rem,2.6vw,1.9rem);
-  font-weight:700;line-height:1.4;letter-spacing:-.01em;
+.card-img .no-img{
+  width:100%;height:100%;
+  display:grid;place-items:center;
+  font-size:2rem;opacity:.3;
 }
-.stage-body .desc{margin:12px 0 0;color:var(--ink-2);font-size:.93rem;line-height:1.85;}
-.stage-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px;}
+
+/* テキストエリア */
+.card-body{
+  padding:12px 14px 16px;
+  display:flex;flex-direction:column;
+  gap:6px;flex:1;
+}
+.card-meta{
+  display:flex;align-items:center;gap:8px;
+  font-size:.72rem;font-weight:700;
+  color:var(--accent);
+}
+.card-meta .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);flex-shrink:0;
+}
+.card-meta .award-star{color:var(--gold);}
+.card-title{
+  margin:0;
+  font-family:"Space Grotesk","Noto Sans JP",sans-serif;
+  font-size:clamp(.88rem,2.2vw,1.05rem);
+  font-weight:700;line-height:1.35;letter-spacing:-.01em;
+  color:var(--ink);
+}
+.card-desc{
+  margin:0;font-size:.78rem;color:var(--ink-2);
+  line-height:1.65;
+  display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+
 .tag{
   display:inline-flex;align-items:center;gap:5px;
-  padding:4px 12px;border-radius:var(--r-sm);
-  font-size:.74rem;font-weight:500;border:1px solid;
+  padding:3px 10px;border-radius:var(--r-sm);
+  font-size:.68rem;font-weight:500;border:1px solid;
 }
 .tag.award{
   color:#241A03;font-weight:700;border-color:transparent;
   background:linear-gradient(120deg,var(--gold-lit),#FFE9A8);
-  box-shadow:0 0 16px -5px rgba(245,196,81,.9);
+  box-shadow:0 0 12px -4px rgba(245,196,81,.8);
 }
-.stage-cta{
-  display:inline-flex;align-items:center;gap:10px;margin-top:24px;
-  padding:13px 26px;border-radius:var(--r-sm);
-  font-weight:700;font-size:.94rem;color:#fff;border:1px solid transparent;
-  background:var(--stage-accent,var(--green));
-  transition:transform .25s var(--ease),box-shadow .25s var(--ease),filter .25s var(--ease);
-  box-shadow:0 14px 30px -14px color-mix(in srgb, var(--stage-accent,var(--green)) 90%, transparent);
-}
-.stage-cta:hover{transform:translateY(-2px);filter:brightness(1.06);}
-.stage.swap .stage-body,.stage.swap .stage-media{animation:swapin .5s var(--ease);}
-@keyframes swapin{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 
 .empty{padding:64px 20px;text-align:center;color:var(--ink-3);}
 .empty strong{display:block;color:var(--ink-2);font-size:1.05rem;margin-bottom:8px;font-weight:500;}
@@ -364,30 +335,41 @@ body::before{
 .reveal.in{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease);}
 
 /* ---------- Footer ---------- */
-footer{margin-top:110px;padding:38px 0;border-top:1px solid var(--edge);}
-.foot-inner{width:var(--shell);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
-.foot-logo{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.02em;font-size:1.02rem;}
-.foot-inner p{margin:0;color:var(--ink-3);font-size:.85rem;}
+/* ---------- Footer ---------- */
+footer{margin-top:80px;border-top:1px solid var(--edge);background:var(--paper-2);}
+.foot-inner{width:var(--shell);margin:0 auto;padding:40px 0 20px;}
 
-/* ============================================================
-   モバイル：ステージは隠し、行をタップで直接開く
-   ============================================================ */
-@media (max-width:900px){
-  .showcase{grid-template-columns:1fr;gap:0;}
-  .stage{display:none;}
-  .row{padding:20px 52px 20px 16px;}
-  .row-desc{
-    position:relative;z-index:1;margin:8px 0 0;
-    color:var(--ink-2);font-size:.87rem;line-height:1.7;
-    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-  }
-  .controls{position:static;}
-  .filter-btn{flex:1 1 auto;text-align:center;padding:10px 14px;}
+.foot-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:28px;border-bottom:1px solid var(--edge);}
+.foot-logo{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.02em;font-size:1.1rem;}
+.foot-tagline{margin:0;color:var(--ink-3);font-size:.82rem;}
+
+/* アコーディオン */
+.foot-accord{border-bottom:1px solid var(--edge);}
+.foot-accord summary{
+  list-style:none;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 4px;cursor:pointer;
+  font-size:.83rem;font-weight:700;color:var(--ink-2);
+  user-select:none;
 }
-@media (min-width:901px){
-  .row-desc{display:none;}
-  /* 左カラムを下に伸ばし、最後の行までステージを固定したままにする */
-  #grid{padding-bottom:clamp(160px, 38svh, 460px);}
+.foot-accord summary::-webkit-details-marker{display:none;}
+.foot-accord summary::after{
+  content:"▼";font-size:.65rem;color:var(--ink-3);
+  transition:transform .25s var(--ease);
+}
+.foot-accord[open] summary::after{transform:rotate(180deg);}
+.foot-accord-body{
+  padding:0 4px 18px;color:var(--ink-2);font-size:.8rem;line-height:1.9;
+}
+.foot-accord-body p{margin:0 0 .6em;}
+.foot-accord-body ul{margin:.4em 0;padding-left:1.4em;}
+.foot-accord-body li{margin:.2em 0;}
+
+.foot-copy{padding:20px 4px 0;font-size:.75rem;color:var(--ink-3);}
+
+@media (max-width:700px){
+  .controls{position:static;}
+  .filter-btn{flex:1 1 auto;text-align:center;padding:10px 10px;}
+  .section{padding:32px 0 0;}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -439,13 +421,50 @@ footer{margin-top:110px;padding:38px 0;border-top:1px solid var(--edge);}
 
   <div class="showcase reveal">
     <div id="grid"></div>
-    <aside class="stage" id="stage" aria-live="polite"></aside>
   </div>
 </main>
 
 <footer>
   <div class="foot-inner">
-    <span class="foot-logo">Open EduTech Lab</span>
+
+    <div class="foot-top">
+      <span class="foot-logo">Open EduTech Lab</span>
+      <p class="foot-tagline">中学校の教室から生まれた、教育向け無料ツール集</p>
+    </div>
+
+    <details class="foot-accord">
+      <summary>このサイトについて</summary>
+      <div class="foot-accord-body">
+        <p>Open EduTech Lab は、長野県の中学校教員が開発した学習支援ツールを無料公開するポータルサイトです。</p>
+        <p>技術・情報・探究の授業をはじめ、様々な場面での活用を想定して作られています。掲載ツールはすべてブラウザで動作し、インストール不要で利用できます。</p>
+        <p>ご要望・ご意見はGitHubの各リポジトリのIssueよりお寄せください。</p>
+      </div>
+    </details>
+
+    <details class="foot-accord">
+      <summary>利用規約</summary>
+      <div class="foot-accord-body">
+        <ul>
+          <li>掲載ツールは学校・教育機関での授業・学習目的での利用を自由に認めます。</li>
+          <li>商用目的での利用・再販売は禁止します。</li>
+          <li>ツールのソースコードの無断改変・再配布はご遠慮ください。</li>
+          <li>利用にあたっては各ツールの説明をよくお読みください。</li>
+          <li>本規約は予告なく変更される場合があります。</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="foot-accord">
+      <summary>免責事項</summary>
+      <div class="foot-accord-body">
+        <p>掲載ツールの利用によって生じたいかなる損害についても、開発者は責任を負いません。</p>
+        <p>ツールはできる限り動作確認を行っていますが、すべての環境・端末での動作を保証するものではありません。</p>
+        <p>外部サービス（Google、GitHub等）の仕様変更により、一部機能が利用できなくなる場合があります。</p>
+      </div>
+    </details>
+
+    <p class="foot-copy">&copy; 2025 Open EduTech Lab</p>
+
   </div>
 </footer>
 
@@ -473,7 +492,7 @@ const TOOLS = [
   
     { id:"learning-step", t:"Learning Step", subj:"技術",
     tags:["自由進度学習","授業支援","1EdTech-Japan-賞"],
-    d:"生徒が自分のペースで学習計画を立て、進度を可視化しながら進める自由進度学習システム。教師は全員の進捗を一覧で把握できます。",
+    d:"生徒が自分のペースで学習計画を立て、進度を可視化しながら進める自由進度学習システム。",
     url:"https://kt-1127.github.io/LearningStep/", external:true,
     previews:["自由進度学習システム/jiyushindo-images/top2.png"] },
 
@@ -550,7 +569,7 @@ const subjHex   = s => SUBJ_HEX[s]   || "#4C5A52";
 
 const $ = s => document.querySelector(s);
 const grid = $("#grid"), filters = $("#filters"), search = $("#search"),
-      countEl = $("#count"), stage = $("#stage");
+      countEl = $("#count");
 
 /* ---------- 受賞マーキー ---------- */
 $("#marqueeTrack").innerHTML = (() => {
@@ -581,76 +600,29 @@ function buildFilters(){
   });
 }
 
-/* ---------- 行（インデックス） ---------- */
-function rowHTML(tool){
-  const hasAward = (tool.tags||[]).some(isAwardTag);
-  const subj = tool.subj || "その他";
-  const target = tool.external ? "_blank" : "_self";
-  const rel = tool.external ? ' rel="noopener noreferrer"' : "";
-
-  return `<a class="row${hasAward?" awarded":""}" href="${tool.url}" target="${target}"${rel}
-             data-id="${tool.id}" style="--accent:${hasAward?"var(--gold)":subjColor(subj)}">
-    <h3 class="row-title">${tool.t}</h3>
-    <div class="row-meta">
-      <span class="subj">${subj}</span>
-      ${hasAward?'<span class="star">★</span>':""}
-      <span>${(tool.tags||[]).slice(0,3).join("・")}</span>
-    </div>
-    <p class="row-desc">${tool.d||""}</p>
-    <span class="row-arrow" aria-hidden="true">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-        ${tool.external?'<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>':'<path d="M5 12h13M13 6l6 6-6 6"/>'}
-      </svg>
-    </span>
-  </a>`;
-}
-
-/* ---------- ステージ ---------- */
-function motifSVG(color, seed){
-  const rings = [...Array(7)].map((_,i) =>
-    `<circle cx="${34+((seed*13)%22)}%" cy="${58-((seed*7)%16)}%" r="${9+i*8}%"
-             fill="none" stroke="${color}" stroke-opacity="${(0.30-i*0.035).toFixed(2)}" stroke-width="1.4"/>`).join("");
-  return `<svg class="stage-motif" viewBox="0 0 100 62" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <rect width="100" height="62" fill="${color}" opacity=".05"/>${rings}</svg>`;
-}
-
-function setStage(tool){
+/* ---------- カード ---------- */
+function cardHTML(tool){
   const hasAward = (tool.tags||[]).some(isAwardTag);
   const subj = tool.subj || "その他";
   const accent = hasAward ? "var(--gold)" : subjColor(subj);
-  const seed = [...tool.id].reduce((a,c)=>a+c.charCodeAt(0),0);
   const target = tool.external ? "_blank" : "_self";
   const rel = tool.external ? ' rel="noopener noreferrer"' : "";
 
-  const media = (tool.previews && tool.previews.length)
-    ? (tool.previews[0].match(/\.(mp4|webm|ogg)$/i)
-        ? `<video src="${tool.previews[0]}" muted loop autoplay playsinline preload="metadata"></video>`
-        : `<img src="${tool.previews[0]}" alt="${tool.t} プレビュー" style="width:100%;height:100%;object-fit:contain;display:block;background:var(--paper-3);">`)
-    : motifSVG(hasAward ? "#B8860B" : subjHex(subj), seed);
+  const img = (tool.previews && tool.previews.length)
+    ? `<img src="${tool.previews[0]}" alt="${tool.t}" loading="lazy">`
+    : `<div class="no-img">📦</div>`;
 
-  const tags = (tool.tags||[]).map(tag => {
-    if(isAwardTag(tag)) return `<span class="tag award">★ ${tag}</span>`;
-    const h = [...tag].reduce((a,c)=>a+c.charCodeAt(0),0) % 360;
-    return `<span class="tag" style="color:hsl(${h} 52% 34%);background:hsl(${h} 60% 55% / .11);border-color:hsl(${h} 45% 45% / .28)">${tag}</span>`;
-  }).join("");
-
-  stage.style.setProperty("--stage-accent", accent);
-  stage.innerHTML = `
-    <div class="stage-media">${media}</div>
-    <div class="stage-body">
-      <span class="stage-subj">${subj}</span>
-      <h3>${tool.t}</h3>
-      <p class="desc">${tool.d||""}</p>
-      <div class="stage-tags">${tags}</div>
-      <a class="stage-cta" href="${tool.url}" target="${target}"${rel}>
-        開く
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>`;
-
-  stage.classList.remove("swap");
-  void stage.offsetWidth;
-  stage.classList.add("swap");
+  return `<a class="card${hasAward?" awarded":""}" href="${tool.url}" target="${target}"${rel}
+     data-id="${tool.id}" style="--accent:${accent}">
+    <div class="card-img">${img}</div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="dot"></span>${subj}${hasAward?' <span class="award-star">★</span>':""}
+      </div>
+      <h3 class="card-title">${tool.t}</h3>
+      <p class="card-desc">${tool.d||""}</p>
+    </div>
+  </a>`;
 }
 
 /* ---------- 描画 ---------- */
@@ -677,24 +649,7 @@ function render(){
     return;
   }
 
-  grid.innerHTML = current.map(rowHTML).join("");
-  setStage(current[0]);
-  grid.querySelector(".row")?.classList.add("is-active");
-  bindRows();
-}
-
-function bindRows(){
-  grid.querySelectorAll(".row").forEach(row => {
-    const activate = () => {
-      const tool = current.find(t => t.id === row.dataset.id);
-      if(!tool) return;
-      grid.querySelectorAll(".row").forEach(r => r.classList.remove("is-active"));
-      row.classList.add("is-active");
-      setStage(tool);
-    };
-    row.addEventListener("pointerenter", activate);
-    row.addEventListener("focus", activate);
-  });
+  grid.innerHTML = current.map(cardHTML).join("");
 }
 
 /* ---------- フェードイン ---------- */
