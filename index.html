@@ -82,7 +82,7 @@ body::before{
 .hero{
   position:relative;min-height:100svh;
   display:grid;place-items:center;
-  padding:90px 0 20px;isolation:isolate;
+  padding:90px 0 80px;isolation:isolate;
 }
 #particles{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.7;}
 .hero-inner{width:var(--shell);text-align:center;}
@@ -109,12 +109,13 @@ body::before{
   margin:26px 0 0;
   font-family:"Space Grotesk","Noto Sans JP",sans-serif;
   font-weight:700;
-  font-size:clamp(2.5rem,8.2vw,6.2rem);
+  font-size:clamp(2.8rem,9vw,7rem);
   line-height:1.02;letter-spacing:-.038em;
 }
 .hero h1 .jp{
-  display:block;font-family:"Noto Sans JP",sans-serif;font-weight:900;
-  font-size:clamp(1.5rem,4.4vw,3.2rem);letter-spacing:.01em;margin-top:.3em;
+  display:block;font-family:"Noto Sans JP",sans-serif;font-weight:500;
+  font-size:clamp(.95rem,2vw,1.3rem);letter-spacing:.06em;margin-top:.5em;
+  color:var(--ink-2);
 }
 .flow{
   background:linear-gradient(100deg,var(--ink) 0%,var(--green) 30%,var(--blue) 52%,var(--green) 74%,var(--ink) 100%);
@@ -158,6 +159,9 @@ body::before{
   position:relative;padding:18px 0;overflow:hidden;
   background:linear-gradient(100deg,#14201B,#1C2E26 50%,#14201B);
   mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+}
+.hero-marquee{
+  position:absolute;bottom:0;left:0;right:0;
 }
 .marquee-track{display:flex;width:max-content;animation:slide 44s linear infinite;will-change:transform;}
 .marquee:hover .marquee-track{animation-play-state:paused;}
@@ -403,17 +407,16 @@ footer{margin-top:110px;padding:38px 0;border-top:1px solid var(--edge);}
   <div class="hero-inner">
     <span class="badge"><span class="dot"></span>Open EduTech Lab</span>
     <h1>
-      <span class="flow">ICT &times; EDUCATION</span>
-      <span class="jp">教育の最前線を、教室から。</span>
+      <span class="flow">Open EduTech Lab</span>
+      <span class="jp">授業で使える、無料の学習ツール。</span>
     </h1>
     <p class="type-line"><span id="typed"></span><span class="caret"></span></p>
   </div>
+  <!-- マーキーを hero 内の最下部に配置 -->
+  <section class="marquee hero-marquee" id="awards" aria-label="お知らせ">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </section>
 </header>
-
-<!-- ========================== 受賞マーキー ========================== -->
-<section class="marquee" id="awards" aria-label="受賞実績">
-  <div class="marquee-track" id="marqueeTrack"></div>
-</section>
 
 <!-- ========================== ツール ========================== -->
 <main class="section" id="tools">
@@ -499,7 +502,7 @@ const TOOLS = [
     url:"https://kt-1127.github.io/LasercutterCAD_web/", external:true,
     previews:["LaserCutterCAD/img/top2.png"] },
 
-  { id:"energy-mix", t:"日本エネルギーミックス大作戦", subj:"エネルギー変換",
+  { id:"energy-mix", t:"日本エネルギーミックス大作戦", subj:"エネ変",
     tags:["発電","トレードオフ","学習デジタル教材コンクール（文部科学大臣賞）"],
     d:"発電方法の組み合わせを選び、コスト・CO2・安定供給のバランスを試行錯誤するシミュレーションゲーム。",
     url:"https://kt-1127.github.io/energy-simulator-2025-2050/", external:true,
