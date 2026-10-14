@@ -76,7 +76,9 @@
     { "@type": "ListItem", "position": 15, "name": "生成AIと教育のいま", "url": "https://kt-1127.github.io/Democratization-of-apps/" },
     { "@type": "ListItem", "position": 16, "name": "リアルタイム文字起こし", "url": "https://kt-1127.github.io/Transcript/" },
     { "@type": "ListItem", "position": 17, "name": "お絵描き花火AR", "url": "https://kt-1127.github.io/-AR/" },
-    { "@type": "ListItem", "position": 18, "name": "回路ナビ", "url": "https://kt-1127.github.io/Circuit-Navi/" }
+    { "@type": "ListItem", "position": 18, "name": "回路ナビ", "url": "https://kt-1127.github.io/Circuit-Navi/" },
+    { "@type": "ListItem", "position": 19, "name": "キリガミへんしんショー", "url": "https://kt-1127.github.io/Kirigami-Transformation-Show/" },
+    { "@type": "ListItem", "position": 20, "name": "じぶん発見ラボ", "url": "https://kt-1127.github.io/Self-Discovery-Lab/" }
   ]
 }
 </script>
@@ -502,6 +504,8 @@ footer{margin-top:80px;border-top:1px solid var(--edge);background:var(--paper-2
     <li><a href="https://kt-1127.github.io/Transcript/">リアルタイム文字起こし</a> — 会議・研修をその場で文字起こし。AIによる自動補正・要約・Word出力まで。</li>
     <li><a href="https://kt-1127.github.io/-AR/">お絵描き花火AR</a> — 自分で描いた絵が、夜空やカメラの映像の中で花火になって打ち上がるお絵描きアプリ。</li>
     <li><a href="https://kt-1127.github.io/Circuit-Navi/">回路ナビ</a> — センサーと動かすものを選ぶと、ブレッドボードの配線図が出てくる。図つきのステップ学習・電気のしくみ8章・確認テスト52問つき。</li>
+    <li><a href="https://kt-1127.github.io/Kirigami-Transformation-Show/">キリガミへんしんショー</a> — カメラの前で動くと、紙の切り絵の体がいっしょに動く。顔は自分、体はきせかえ。ミニゲームで体を動かして遊べる。</li>
+    <li><a href="https://kt-1127.github.io/Self-Discovery-Lab/">じぶん発見ラボ</a> — 中学1年の総合的な学習の時間向け。性格診断・大切な3つ・わたしの希望・職業適性診断で自分の強みを見つけ、A4一枚のレポートにまとめる。</li>
   </ul>
 </main>
 
@@ -659,7 +663,19 @@ const TOOLS = [
     tags:["エネルギー変換","センサー回路","ブレッドボード","確認テスト"],
     d:"センサーと動かすものを選ぶと、ブレッドボードの配線図が出てくる。図つきのステップ学習、電気のしくみ8章、確認テスト52問つき。",
     url:"https://kt-1127.github.io/Circuit-Navi/", external:true,
-    previews:["回路ナビ/kairo-images/top2.png"] }
+    previews:["回路ナビ/kairo-images/top2.png"] },
+
+  { id:"kirigami-show", t:"キリガミへんしんショー", subj:"探究",
+    tags:["カメラ","AI姿勢推定","からだを動かす","ミニゲーム"],
+    d:"カメラの前で動くと、紙の切り絵の体がいっしょに動く。顔は自分、体はきせかえ。ロボや恐竜に変身して、ミニゲームで遊べる。カメラの映像は端末の外に送りません。",
+    url:"https://kt-1127.github.io/Kirigami-Transformation-Show/", external:true,
+    previews:["Kirigami Transformation Show/top2.png"] },
+
+  { id:"self-discovery", t:"じぶん発見ラボ", subj:"探究",
+    tags:["キャリア教育","性格診断","総合的な学習の時間","レポート"],
+    d:"中学1年の総合的な学習の時間向け。性格診断・大切な3つ・わたしの希望・職業適性診断の4ステップで自分の強みを見つけ、A4一枚のレポートにまとめる。",
+    url:"https://kt-1127.github.io/Self-Discovery-Lab/", external:true,
+    previews:["Self-Discovery Lab/top2.png"] }
 ];
 /* ============================================================
    ▲▲▲ 差し替えここまで ▲▲▲
